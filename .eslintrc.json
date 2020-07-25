@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint", "html"],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-inferrable-types": "off",
+    "no-console": "off",
+    "@typescript-eslint/indent": ["error", 2],
+    "quotes": [
+      1,
+      "single",
+      {
+        "allowTemplateLiterals": true /*允许模板字符串(es6)*/
+      }
+    ],
+    "semi": ["error", "never"] /*分号*/
+  }
+}
