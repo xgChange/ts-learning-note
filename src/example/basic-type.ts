@@ -16,3 +16,4 @@ a[0] = 44
 let x: [string, number] = ['hello', 2]
 x = ['fff', 9] // Error
 console.log(a, arr, s, x)
+export {}
