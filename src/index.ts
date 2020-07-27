@@ -1,1 +1,1 @@
-const c: boolean = false
+import './example/basic-type'
