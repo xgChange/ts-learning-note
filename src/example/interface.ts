@@ -78,20 +78,20 @@ const arr: indexSigned = { 1: '1' }
 console.log(arr)
 
 // 类的接口实现
-interface ClockInterface {
-  currentTime: string
-  setTime(d: string): void
-}
+// interface ClockInterface {
+//   currentTime: string
+//   setTime(d: string): void
+// }
 
-class Clock implements ClockInterface {
-  currentTime: string = '11'
-  setTime(d: string) {
-    this.currentTime = d
-  }
-  // constructor(d: number, h: number) {
-  //   this.currentTime = `${d}: ${h}`
-  // }
-}
+// class Clock implements ClockInterface {
+//   currentTime: string = '11'
+//   setTime(d: string) {
+//     this.currentTime = d
+//   }
+//   // constructor(d: number, h: number) {
+//   //   this.currentTime = `${d}: ${h}`
+//   // }
+// }
 
 // const c = new Clock()
 // console.log(c)
@@ -168,4 +168,31 @@ const bule: Bule = {
   color: 'red'
 }
 
-console.log(bule)
+// 类静态部分与实例部分的区别
+interface ClockConstructor {
+  new (hour: number, minute: number): ClockInterface;
+}
+interface ClockInterface {
+  tick(): void;
+}
+
+function createClock(ctor: ClockConstructor, hour: number, minute: number): ClockInterface {
+  return new ctor(hour, minute)
+}
+
+class DigitalClock implements ClockInterface {
+  constructor(h: number, m: number) { }
+  tick() {
+    console.log('beep beep')
+  }
+}
+class AnalogClock implements ClockInterface {
+  constructor(h: number, m: number) { }
+  tick() {
+    console.log('tick tock')
+  }
+}
+
+const digital = createClock(DigitalClock, 12, 17)
+const analog = createClock(AnalogClock, 7, 32)
+// console.log(bule)

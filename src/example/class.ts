@@ -98,9 +98,9 @@ class Greeter {
   }
 }
 
-let greeter1: Greeter
-greeter1 = new Greeter()
-console.log(greeter1.greet(), greeter1)
+// let greeter1: Greeter
+// greeter1 = new Greeter()
+// console.log(greeter1.greet(), greeter1)
 
 const greeterMaker: typeof Greeter = Greeter
 greeterMaker.standardGreeting = 'Hey there!'

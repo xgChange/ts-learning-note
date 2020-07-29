@@ -12,6 +12,7 @@
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "no-console": "off",
     "@typescript-eslint/indent": ["error", 2],
     "quotes": [
