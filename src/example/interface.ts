@@ -140,3 +140,24 @@ class ddd extends Control implements SelectableControl {
 }
 
 console.log(new ddd())
+
+
+// 接口继承
+interface Color {
+  color: string
+}
+
+interface Bule extends Color {
+  action: string
+}
+
+interface Red extends Color {
+  length: number
+}
+
+const bule: Bule = {
+  action: '这是蓝色',
+  color: 'red'
+}
+
+console.log(bule)
