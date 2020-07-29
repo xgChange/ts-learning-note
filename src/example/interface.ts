@@ -123,6 +123,14 @@ console.dir(c)
 // 接口继承类
 class Control {
   private state: any
+  
+  public getState() {
+    return this.state
+  
+  }
+  public setState(state: string) {
+    this.state = state
+  }
 }
 
 interface SelectableControl extends Control {
@@ -130,16 +138,16 @@ interface SelectableControl extends Control {
 }
 
 class ddd extends Control implements SelectableControl {
-  constructor() {
+  constructor(n: string) {
     super()
-    // this.state = 222
+    this.setState(n)
   }
   select(): void {
-    console.log('fff')
+    return this.getState()
   }
 }
 
-console.log(new ddd())
+console.log(new ddd('newState').select())
 
 
 // 接口继承
