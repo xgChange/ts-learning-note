@@ -1,4 +1,4 @@
 // import './example/basic-type'
 // import './example/interface'
 
-import './example/class'
+import './example/Generics'
