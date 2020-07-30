@@ -59,8 +59,8 @@ console.log(pickedCard)
 
 let suits = ['hearts', 'spades', 'clubs', 'diamonds']
 
-function pickCard(x: {suit: string; card: number; }[]): number;
-function pickCard(x: number): {suit: string; card: number; };
+function pickCard(x: {suit: string; card: number; }[]): number
+function pickCard(x: number): {suit: string, card: number }
 function pickCard(x: any): any {
   // Check to see if we're working with an object/array
   // if so, they gave us the deck and we'll pick the card
@@ -81,3 +81,25 @@ console.log('card: ' + pickedCard1.card + ' of ' + pickedCard1.suit)
 
 let pickedCard2 = pickCard(15)
 console.log('card: ' + pickedCard2.card + ' of ' + pickedCard2.suit)
+
+interface Animal {
+  name: string;
+}
+interface Cat {
+  name: string;
+  run(): void;
+}
+
+const animal: Animal = {
+  name: 'tom'
+}
+
+const cat: Cat = {
+  name: 'cat',
+  run: () => {}
+}
+
+let tom: Animal = cat
+
+enum Days {Sun = 7, Mon, Tue, Wed, Thu, Fri, Sat = <any>'S'}
+console.log(Days)

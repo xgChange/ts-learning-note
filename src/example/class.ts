@@ -1,3 +1,8 @@
+/**
+ * @description 类
+ * 1. 类实现接口时候是会对实例部分进行类型检查，不会对静态部分做类型检查，例如constructor
+ */
+
 // 类的修饰符
 // class Person {
 //   protected name: string = '222'
@@ -85,9 +90,13 @@
 // department.printMeeting()
 // department.generateReports() // 错误: 方法在声明的抽象类中不存在
 
+// 修改静态方法
 class Greeter {
   static standardGreeting = 'Hello, there';
-  greeting: string = ''
+  greeting?: string
+  constructor(greet?: string) {
+    this.greeting = greet
+  }
   greet() {
     if (this.greeting) {
       return 'Hello, ' + this.greeting
@@ -98,15 +107,58 @@ class Greeter {
   }
 }
 
-// let greeter1: Greeter
-// greeter1 = new Greeter()
-// console.log(greeter1.greet(), greeter1)
+let greet: Greeter = new Greeter('有值')
+console.log(greet.greet())
 
-const greeterMaker: typeof Greeter = Greeter
-greeterMaker.standardGreeting = 'Hey there!'
-console.dir(greeterMaker)
+let gr: typeof Greeter = Greeter
+gr.standardGreeting = '修改后的'
+let p: Greeter = new gr()
+console.log(p.greet()) 
 
-const greeter2: Greeter = new greeterMaker()
-console.log(greeter2.greet(), greeter2)
+// 实例部分
+interface ClockInter {
+  h: number
+  m: string
+  tick(): string
+}
+// 静态部分
+interface ClockConstructor {
+  new (h: number, m: string): ClockInter
+}
 
+function createClock(obj: ClockConstructor, h: number, m: string): ClockInter {
+  return new obj(h, m)
+}
+
+class Clock implements ClockInter{
+  h: number
+  m: string
+  constructor(h: number, m: string) {
+    this.h = h
+    this.m = m
+  }
+  tick() {
+    return this.h + this.m
+  }
+}
+
+console.log(createClock(Clock, 1, '2').tick()) 
+
+
+// 
+class Control {
+  protected state: number = 2
+}
+
+interface SelectInt extends Control {
+  select(): void
+}
+
+class Button extends Control implements SelectInt {
+  select() {
+    console.log('button 控制', this.state)
+  }
+}
+
+new Button().select()
 export {}
