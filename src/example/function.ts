@@ -18,10 +18,21 @@ a2(undefined, 1)
 // console.log(a1, a2)
 
 // 关于this
+
+interface Card {
+  suit: string,
+  card: number
+}
+interface Deck {
+  suits: string[],
+  cards: number[],
+  createCardPicker(this: Deck): () => Card
+}
+
 const deck = {
   suits: ['hearts', 'spades', 'clubs', 'diamonds'],
   cards: Array(52),
-  createCardPicker: function() {
+  createCardPicker: function(this: Deck) {
     return () => {
       const pickedCard = Math.floor(Math.random() * 52)
       const pickedSuit = Math.floor(pickedCard / 13)
@@ -36,12 +47,37 @@ const pickedCard = cardPicker()
 
 console.log(pickedCard)
 
-interface SeFunc {
-  (n1: number, n2: number): number
+// interface SeFunc {
+//   (n1: number, n2: number): number
+// }
+
+// let ccc: SeFunc = (n1: number, n2: number): number => {
+//   return n1 + n2
+// }
+
+// console.log(ccc(1, 2)) 
+
+let suits = ['hearts', 'spades', 'clubs', 'diamonds']
+
+function pickCard(x: {suit: string; card: number; }[]): number;
+function pickCard(x: number): {suit: string; card: number; };
+function pickCard(x: any): any {
+  // Check to see if we're working with an object/array
+  // if so, they gave us the deck and we'll pick the card
+  if (typeof x == 'object') {
+    let pickedCard = Math.floor(Math.random() * x.length)
+    return pickedCard
+  }
+  // Otherwise just let them pick the card
+  else if (typeof x == 'number') {
+    let pickedSuit = Math.floor(x / 13)
+    return { suit: suits[pickedSuit], card: x % 13 }
+  }
 }
 
-let ccc: SeFunc = (n1: number, n2: number): number => {
-  return n1 + n2
-}
+let myDeck = [{ suit: 'diamonds', card: 2 }, { suit: 'spades', card: 10 }, { suit: 'hearts', card: 4 }]
+let pickedCard1 = myDeck[pickCard(myDeck)]
+console.log('card: ' + pickedCard1.card + ' of ' + pickedCard1.suit)
 
-console.log(ccc(1, 2)) 
+let pickedCard2 = pickCard(15)
+console.log('card: ' + pickedCard2.card + ' of ' + pickedCard2.suit)
